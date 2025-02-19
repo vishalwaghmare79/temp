@@ -32,9 +32,13 @@ export const addWishlistController = async (req, res) => {
 };
 
 export const removeWishlistController = async (req, res) => {
+    console.log("wishlist is ", req.params);
+    
     try {
-      const { wishlistId } = req.params; 
-      const item = await Wishlist.findByIdAndDelete(wishlistId);
+      const { id } = req.params; 
+      const item = await Wishlist.findByIdAndDelete(id);
+      console.log("deleted item", item);
+      
   
       res.status(200).send({
         success: true,

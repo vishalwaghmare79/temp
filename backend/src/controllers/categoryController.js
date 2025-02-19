@@ -26,7 +26,6 @@ export const createCategoryController = async (req, res) => {
 
     const category = await new Category({
       name,
-      slug: slugify(name),
       image,
     }).save();
 
@@ -68,7 +67,6 @@ export const updateCategoryController = async (req, res) => {
       id,
       { 
         name, 
-        slug: slugify(name), 
         image: updatedImage 
       },
       { new: true }
@@ -111,7 +109,7 @@ export const getCategoryController = async (req, res) => {
 
 export const getSingleCategoryController = async (req, res) => {
   try {
-    const category = await Category.findOne({ slug: req.params.slug });
+    const category = await Category.findOne({ _id: req.params.id });
 
     if (!category) {
       return res.status(404).send({

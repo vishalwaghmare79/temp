@@ -3,10 +3,10 @@ import { requireSignIn } from '../middlewares/authMiddleware.js';
 import { addWishlistController, getWishlistController, removeWishlistController } from '../controllers/wishlistController.js';
 const router = express.Router();
 
-router.post('/add-wishlist', requireSignIn, addWishlistController);
+router.post('/add-wishlist', requireSignIn, addWishlistController); 
 
-router.delete('/remove-wishlist/:wishlistId', requireSignIn, removeWishlistController);
+router.delete('/remove-wishlist/:id', requireSignIn, removeWishlistController);
 
-router.get('/', requireSignIn, getWishlistController);
+router.get('/get-wishlist', requireSignIn, getWishlistController);
 
 export const wishlistRoutes = router; 

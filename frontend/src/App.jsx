@@ -21,6 +21,8 @@ import Sellproduct from "./user-dashboard/Sellproduct";
 import ProductPage from "./pages/ProductPage";
 import UpdateProduct from "./components/UpdateProduct";
 import ManageProducts from "./components/ManageProducts";
+import CartPage from "./pages/CartPage";
+import ProductDetailsPage from "./components/ProductDetailsPage";
 
 const App = () => {
   return (
@@ -33,6 +35,8 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/products" element={<ProductPage />} />
+        <Route path="/products/productdetailspage/:id" element={<ProductDetailsPage />} />
+        <Route path="/cart" element={<CartPage />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
 
         {/* User Protected Routes */}

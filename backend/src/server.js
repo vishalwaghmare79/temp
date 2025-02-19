@@ -6,6 +6,7 @@ import { wishlistRoutes } from './routes/wishlistRoute.js';
 import { connectDB } from './config/db.js';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import { orderRoutes } from './routes/orderRoutes.js';
 dotenv.config();
 const app = express();
 
@@ -18,6 +19,7 @@ app.use("/api/v1/auth", authRoutes); // usersRouter
 app.use('/api/v1/category', categoryRoutes); // categoryRouter
 app.use('/api/v1/product', productRoutes); // productRouter
 app.use('/api/v1/wishlist', wishlistRoutes); // wishlistRoute
+app.use('/api/v1/order', orderRoutes) // paymentRouter
 
 app.get("/", (req, res) => {
   res.send("Welcome to ShopEase");

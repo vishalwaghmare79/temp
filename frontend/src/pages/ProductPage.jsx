@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { getAllCategories } from "../services/categoryService";
-import { getAllProducts } from "../services/productService";
+import { getAllProducts, getProductsByCategory } from "../services/productService";
 import ProductCard from "../components/ProductCard";
 import useAuth from './../hooks/useAuth';
 
@@ -11,11 +12,19 @@ const ProductPage = () => {
   const [products, setProducts] = useState([]);
   const { auth } = useAuth();
   const { token } = auth;
+  const location = useLocation();
 
   useEffect(() => {
     fetchCategories();
-    fetchProducts();
-  }, []);
+    const queryParams = new URLSearchParams(location.search);
+    const categoryId = queryParams.get('category');
+    if (categoryId) {
+      setSelectedCategory(categoryId);
+      fetchProductsByCategory(categoryId);
+    } else {
+      fetchProducts();
+    }
+  }, [location.search]);
 
   const fetchCategories = async () => {
     try {      
@@ -39,8 +48,24 @@ const ProductPage = () => {
     }
   };
 
+  const fetchProductsByCategory = async (categoryId) => {
+    try {
+      const res = await getProductsByCategory(categoryId, token);
+      if (res.success) {
+        setProducts(res.products);
+      }
+    } catch (error) {
+      console.error("Error loading products by category:", error);
+    }
+  };
+
   const handleCategoryClick = (category) => {
     setSelectedCategory(category === selectedCategory ? null : category);
+    if (category === selectedCategory) {
+      fetchProducts();
+    } else {
+      fetchProductsByCategory(category);
+    }
   };
 
   const filteredProducts = products.filter(

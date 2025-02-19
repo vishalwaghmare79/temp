@@ -38,13 +38,13 @@ function Navbar() {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/search" className="text-gray-700 hover:text-blue-600" activeClassName="text-blue-600">
+              <NavLink to="/products" className="text-gray-700 hover:text-blue-600" activeClassName="text-blue-600">
                 <i className="ri-search-line"></i>
                 <span>Search</span>
               </NavLink>
             </li>
             <li>
-              <NavLink to="/user/wishlist" className="text-gray-700 hover:text-blue-600" activeClassName="text-blue-600">
+              <NavLink to="/user/dashboard/wishlist" className="text-gray-700 hover:text-blue-600" activeClassName="text-blue-600">
                 <Badge count={0} overflowCount={5}>
                   <i className="ri-heart-line"></i>
                 </Badge>

@@ -43,6 +43,11 @@ export const getAllProducts = async (token) => {
   }
 };
 
+export const getProductsByCategory = async (categoryId, token) => {
+  const response = await axios.get(`${API_BASE_URL}/api/v1/product/get-products/${categoryId}`);
+  return response.data;
+};
+
 // Get all products of the logged-in user
 export const getUserProducts = async (token) => {
   

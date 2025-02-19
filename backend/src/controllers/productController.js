@@ -34,7 +34,6 @@ export const createProductController = async (req, res) => {
 
     const product = new Product({
       name,
-      slug: slugify(name),
       description,
       price,
       category,
@@ -93,7 +92,6 @@ export const updateProductController = async (req, res) => {
           req.params.id,
           {
               name,
-              slug: slugify(name),
               description,
               price,
               category,
@@ -126,7 +124,7 @@ export const getProductController = async (req, res) => {
     const filter = userId ? { createdBy: { $ne: userId } } : {};  
 
     const products = await Product.find(filter)
-      .populate('category', 'name _id slug') 
+      .populate('category', 'name _id') 
       .sort({ createdAt: -1 });
 
     res.status(200).json({
@@ -242,6 +240,7 @@ export const getUserProductsController = async (req, res) => {
 
     const userProducts = await Product.find(filter)
       .populate("category")
+      .populate("createdBy", "name email")
       .sort({ createdAt: -1 });
 
     res.status(200).send({
